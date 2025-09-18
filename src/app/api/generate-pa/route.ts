@@ -200,24 +200,44 @@ const patientData: PatientData = {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('API route called');
+    
     const body = await request.json();
+    console.log('Request body:', body);
+    
     const { patientId, serviceType } = body;
+
+    if (!patientId || !serviceType) {
+      console.log('Missing required parameters');
+      return NextResponse.json({
+        success: false,
+        error: 'Missing required parameters: patientId and serviceType'
+      }, { status: 400 });
+    }
+
+    console.log('Looking for patient:', patientId);
+    console.log('Available patients:', patientData.patients.map(p => p.patient_id));
 
     // Use embedded patient data instead of fetching from external file
     const patient = patientData.patients.find((p: Patient) => p.patient_id === patientId);
 
     if (!patient) {
+      console.log('Patient not found:', patientId);
       return NextResponse.json({
         success: false,
         error: 'Patient not found'
-      });
+      }, { status: 404 });
     }
 
+    console.log('Patient found:', patient.demographics.name);
+
     // Extract clinical information
-   const clinicalInfo = extractClinicalInfo(patient);
+    const clinicalInfo = extractClinicalInfo(patient);
+    console.log('Clinical info extracted');
     
     // Generate the PA form
     const paForm = generatePAForm(patient, clinicalInfo, serviceType);
+    console.log('PA form generated');
 
     return NextResponse.json({
       success: true,
@@ -228,8 +248,8 @@ export async function POST(request: NextRequest) {
     console.error('Error generating PA form:', error);
     return NextResponse.json({
       success: false,
-      error: 'Internal server error'
-    });
+      error: 'Internal server error: ' + (error instanceof Error ? error.message : 'Unknown error')
+    }, { status: 500 });
   }
 }
 
