@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Favicon</title>
+</head>
+<body>
+    <canvas id="canvas" width="32" height="32" style="border: 1px solid #ccc;"></canvas>
+    <br>
+    <button onclick="downloadFavicon()">Download Favicon</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw medical cross with automation gear
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(0, 0, 32, 32);
+        
+        // Medical cross
+        ctx.fillStyle = 'white';
+        ctx.fillRect(14, 8, 4, 16);
+        ctx.fillRect(8, 14, 16, 4);
+        
+        // Simple gear
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(24, 8, 3, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        function downloadFavicon() {
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
