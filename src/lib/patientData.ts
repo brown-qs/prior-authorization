@@ -89,9 +89,9 @@ const embeddedPatientData: PatientData = {
         "Melatonin 5mg qHS PRN"
       ],
       lab_results: [
-        {date: "2024-12-30", test: "UDS", result: "Negative for all substances"},
-        {date: "2024-12-30", test: "CBC", result: "Within normal limits"},
-        {date: "2024-12-30", test: "CMP", result: "Within normal limits"}
+        {date: "2024-12-30", test: "UDS", result: "Negative for all substances", reference: "Negative"},
+        {date: "2024-12-30", test: "CBC", result: "Within normal limits", reference: "Normal range"},
+        {date: "2024-12-30", test: "CMP", result: "Within normal limits", reference: "Normal range"}
       ]
     },
     {
@@ -138,9 +138,9 @@ const embeddedPatientData: PatientData = {
         "Gabapentin 600mg TID for pain and anxiety"
       ],
       lab_results: [
-        {date: "2025-01-03", test: "UDS", result: "Positive for buprenorphine only"},
-        {date: "2025-01-03", test: "Pregnancy test", result: "Negative"},
-        {date: "2025-01-03", test: "HIV/HCV", result: "Negative/Negative"}
+        {date: "2025-01-03", test: "UDS", result: "Positive for buprenorphine only", reference: "Negative"},
+        {date: "2025-01-03", test: "Pregnancy test", result: "Negative", reference: "Negative"},
+        {date: "2025-01-03", test: "HIV/HCV", result: "Negative/Negative", reference: "Negative/Negative"}
       ]
     }
   ]
